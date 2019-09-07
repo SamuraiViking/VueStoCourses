@@ -157,6 +157,7 @@ export default {
       // Get Elements
       var app = document.getElementById('app')
       var tables = document.getElementsByTagName('table')
+      var tableTop = document.getElementsByClassName('vgt-global-search')[0]
       // var header = document.getElementById('website-header')
       // var myCourses = document.getElementById('user-courses-table-options')
       var stolafCourses = document.getElementById('stolaf-courses-table-options')
@@ -179,6 +180,7 @@ export default {
 
       // Set style of elements 
       tables[0].style.background = this.tables1[semester]
+      tableTop.style.background = this.contact[semester]
       // tables[1].style.background = this.tables2[semester]
       // header.style.background = this.header[semester]
       // myCourses.style.background = this.myCourses[semester]

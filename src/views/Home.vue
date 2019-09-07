@@ -19,11 +19,13 @@
         </div>
         <p class="website-header-title" v-if="coursesUnavailable">Courses for this term arn't avaiable yet</p>
         <stolaf-courses-table
+          v-if="showTable"
+          v-on:resetFilters="resetFilters"
           v-bind:nightMode="nightMode"
           v-on:showMoreInfo="showMoreInfo"
           v-bind:rows="stolafTableRows"
           v-bind:selectedValues="selectedValues"
-          v-bind:columns="stolafColumns"
+          v-bind:columns="columns()"
           />
       </div>
     </div>
@@ -100,6 +102,8 @@ export default {
   },
   data() {
     return {
+      showTable: true,
+      switch: true,
       nightMode: false,
       coursesUnavailable: false,
       selectedSemester: 1,
@@ -279,6 +283,175 @@ export default {
           type: 'number'
         }
       ],
+      stolafColumns1: [
+        {
+          label: 'Status', 
+          field: 'status',
+          hidden: false,
+          filterOptions: {
+            placeholder: 'All',
+            enabled: true,
+            filterDropdownItems: [
+              {text: 'Open', value: 'O'},
+              {text: 'Closed', value: 'C'},
+            ],
+          }
+        },
+        { 
+          label: 'Name', 
+          field: 'name',
+          hidden: false,
+          filterOptions: {
+            placeholder: 'All',
+            filterValue: '',
+            enabled: true,
+          }
+        },
+        { 
+          label: 'Dept', 
+          field: 'dept',
+          hidden: false,
+          filterOptions: {
+            enabled: true,
+            filterValue: '',
+            placeholder: 'All',
+            filterDropdownItems: departments(),
+          }
+        },
+        {
+          label: 'Num',
+          field: 'num',
+          type: 'number',
+          filterOptions: {
+            enabled: true,
+            filterValue: '',
+            placeholder: 'All',
+            filterDropdownItems: [
+              { text: '100', value: 100 },
+              { text: '200', value: 200 },
+              { text: '300', value: 300 },
+            ],
+            filterFn: this.numFilterFn
+          }
+        },
+        {
+          label: "Ge's", 
+          field: 'gereqs',
+          hidden: false,
+          filterOptions: {
+            filterValue: '',
+            placeholder: 'Any',
+            enabled: true,
+            filterDropdownItems: ges()
+          }
+        },
+        {
+          label: 'Days', 
+          field: 'days',
+          hidden: false,
+          filterOptions: {
+            filterValue: '',
+            placeholder: 'All',
+            enabled: true,
+            filterDropdownItems: [
+              'MWF',
+              'TTh',
+              'M-F',
+              'M',
+              'Tu',
+              'W',
+              'Th',
+              'F',
+              'Other'
+            ],
+            filterFn: this.daysFilterFn
+          }
+        },
+        { label: 'Times', 
+          field: 'times',
+          hidden: false,
+          filterOptions: {
+            filterValue: '',
+            placeholder: 'All',
+            enabled: true,
+            filterDropdownItems: [
+              { text: '8 am', value: '08' },
+              { text: '9 am', value: '09' },
+              { text: '10 am', value: '10' },
+              { text: '11 am', value: '11' },
+              { text: '12', value: '12' },
+              { text: '1 pm', value: '13' },
+              { text: '2 pm', value: '14' },
+              { text: '3 pm', value: '15' },
+              { text: '4 pm', value: '16' },
+              { text: '5 pm', value: '17' },
+              { text: '6 pm', value: '18' },
+              { text: '7 pm', value: '19' },
+            ],
+            filterFn: this.timesFilterFn
+          }
+        },
+        { label: 'Prof', 
+          field: 'prof',
+          hidden: false,
+          filterOptions: {
+            placeholder: 'All',
+            enabled: true,
+          }
+        },
+        { label: 'Rating', 
+          field: 'rating',
+          hidden: false,
+          filterOptions: {
+            filterValue: '',
+            placeholder: 'All',
+            enabled: true,
+            filterDropdownItems: [
+              { text: '1 or more', value: 1 },
+              { text: '2 or more', value: 2 },
+              { text: '3 or more', value: 3 },
+              { text: '4 or more', value: 4 },
+            ],
+            filterFn: this.ratingFilterFn
+          },
+          type: 'number'
+        },
+        { label: 'Difficulty', 
+          field: 'difficulty',
+          hidden: false,
+          filterOptions: {
+            filterValue: '',
+            placeholder: 'All',
+            enabled: true,
+            filterDropdownItems: [
+              { text: '2 or less', value: 2 },
+              { text: '3 or less', value: 3 },
+              { text: '4 or less', value: 4 },
+            ],
+            filterFn: this.difficultyFilterFn
+          },
+          type: 'number'
+        },
+        {
+          label: 'Reviews', 
+          field: 'reviews',
+          hidden: false,
+          filterOptions: {
+            filterValue: '',
+            placeholder: 'All',
+            enabled: true,
+            filterFn: this.reviewsFilterFn,
+            filterDropdownItems: [
+              { text: '5 or more', value: 5 },
+              { text: '10 or more', value: 10 },
+              { text: '15 or more', value: 15 },
+              { text: '20 or more', value: 20 },
+            ]
+          },
+          type: 'number'
+        }
+      ],
+
       /* Number used to switch stolafColumns1 to stolafColumns2 and vise versa */
       userColumns: [
         {
@@ -354,6 +527,12 @@ export default {
     }
   },
   methods: {
+    columns() {
+      return this.switch ? this.stolafColumns : this.stolafColumns1
+    },
+    resetFilters() {
+      this.switch = !this.switch
+    },
     newModeSelected(mode) {
       this.nightMode = mode
     },
@@ -560,6 +739,7 @@ export default {
 }
 
 .website-header-title {
+  font-weight: 500;
   margin-bottom: 20px;
   color: white;
   font-size: 40px;

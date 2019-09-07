@@ -22,11 +22,16 @@
         ]
       }"
       >
+      <div slot="table-actions">
+        <div id="table-top">
+          <span id="filters-location">Filters are below the headers</span> <b-button v-on:click="resetFilters" id="reset-btn">Reset Filters</b-button> 
+        </div>
+      </div>
       <div id="stolaf-courses-footer" slot="table-actions-bottom">
         <p class="no-rows-msg">Expected more courses? Check the Filters!</p>
       </div>
       <div slot="emptystate">
-        <p id="no-data">none</p>
+        <p id="no-data">loading ... </p>
       </div>
     <!-- Table Modifileications -->
       <template slot="table-row" slot-scope="props">
@@ -114,6 +119,7 @@ export default {
   },
   data() {
     return {
+      columnNumber: 1,
       mousePos: {
         x: 0,
         y: 0,
@@ -148,6 +154,9 @@ export default {
     }
   },
   methods: {
+    resetFilters() {
+      this.$emit('resetFilters')
+    },
     test(props) {
       console.log(props.row)
     },
@@ -310,11 +319,35 @@ export default {
 
 <style>
 
+.vgt-global-search__input {
+  width: 0px !important
+}
+
+.vgt-pull-left {
+  width: 0px !important;
+}
+
+#table-top {
+  /*background: blue;*/
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+}
+
+#filters-location {
+  font-weight: 500;
+  color: white;
+  line-height: 35px;
+  margin-right: 20px;
+}
+
 #expected-more-courses {
   background: blue;
 }
 
 #no-data {
+  font-size: 20px;
+  font-weight: 900;
   text-align: center;
 } 
 
