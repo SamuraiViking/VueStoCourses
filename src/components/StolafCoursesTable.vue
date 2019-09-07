@@ -28,10 +28,10 @@
         </div>
       </div>
       <div id="stolaf-courses-footer" slot="table-actions-bottom">
-        <p class="no-rows-msg">Expected more courses? Check the Filters!</p>
+        <p class="no-rows-msg"> Expected more courses? Check the Filters!</p>
       </div>
       <div slot="emptystate">
-        <p id="no-data">loading ... </p>
+        <p id="no-data">{{ tableText }}</p>
       </div>
     <!-- Table Modifileications -->
       <template slot="table-row" slot-scope="props">
@@ -107,7 +107,7 @@ import { ges } from './dropDownItems/Ges'
 
 export default {
   name: 'stolaf-courses-table',
-  props: ['rows', 'selectedValues', 'visibleColumns', 'columns', 'nightMode'],
+  props: ['rows', 'selectedValues', 'visibleColumns', 'columns', 'nightMode', 'tableText'],
   components: {
     WhosCoursesSelector,
     HideOptions,
@@ -116,6 +116,9 @@ export default {
     SemesterSelector,
     YearSelector,
     DraftSelector
+  },
+  created() {
+    console.log(this.tableText)
   },
   data() {
     return {
@@ -158,7 +161,6 @@ export default {
       this.$emit('resetFilters')
     },
     test(props) {
-      console.log(props.row)
     },
     isNightMode() {
       return this.nightMode ? 'grey-color' : 'white-color'

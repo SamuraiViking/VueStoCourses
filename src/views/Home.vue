@@ -14,12 +14,14 @@
           <div>
             <year-selector v-on:newYearSelected="updateSelectedValuesAndRows" id="year-selector" />
             <semester-selector v-on:newSemesterSelected="updateSelectedValuesAndRows"
+                               v-on:newModeSelected="newModeSelected"
                                v-on:newTypeSelected="updateSelectedValuesAndRows"/>
           </div>
         </div>
         <p class="website-header-title" v-if="coursesUnavailable">Courses for this term arn't avaiable yet</p>
         <stolaf-courses-table
           v-if="showTable"
+          v-bind:tableText="tableText"
           v-on:resetFilters="resetFilters"
           v-bind:nightMode="nightMode"
           v-on:showMoreInfo="showMoreInfo"
@@ -102,6 +104,7 @@ export default {
   },
   data() {
     return {
+      tableText: 'loading ... ',
       showTable: true,
       switch: true,
       nightMode: false,
@@ -134,7 +137,7 @@ export default {
           field: 'name',
           hidden: false,
           filterOptions: {
-            placeholder: 'All',
+            placeholder: 'Search',
             filterValue: '',
             enabled: true,
           }
@@ -227,7 +230,7 @@ export default {
           field: 'prof',
           hidden: false,
           filterOptions: {
-            placeholder: 'All',
+            placeholder: 'Search',
             enabled: true,
           }
         },
@@ -302,7 +305,7 @@ export default {
           field: 'name',
           hidden: false,
           filterOptions: {
-            placeholder: 'All',
+            placeholder: 'Search',
             filterValue: '',
             enabled: true,
           }
@@ -395,7 +398,7 @@ export default {
           field: 'prof',
           hidden: false,
           filterOptions: {
-            placeholder: 'All',
+            placeholder: 'Search',
             enabled: true,
           }
         },
@@ -531,9 +534,12 @@ export default {
       return this.switch ? this.stolafColumns : this.stolafColumns1
     },
     resetFilters() {
+      this.tableText = 'loading ... '
       this.switch = !this.switch
+      this.getStolafTableRows()
     },
     newModeSelected(mode) {
+      console.log(mode)
       this.nightMode = mode
     },
     mouseOverBody(event) {
@@ -584,13 +590,6 @@ export default {
     difficultyFilterFn(data, filterString) {
       return data <= Number(filterString)
     },
-    resetColumns() {
-      this.visibleColumns = this.defaultVisibleColumns
-      if(this.showHideOptions) {
-        this.showHideOptions = false
-      }
-      this.updateHideOptions(this.visibleColumns)
-    },
     updateSelectedValuesAndRows(key, value) {
       console.log(value)
       this.selectedValues[key] = value
@@ -616,8 +615,10 @@ export default {
       var term = `${year}${semester}`
       this.coursesUnavailable = false;
       this.stolafTableRows = []
+      this.tableText = 'loading ... '
       axios.get(`api/courses?term=${term}&type=${type}`).then(response => {
         this.stolafTableRows = response.data.courses
+        this.tableText = 'no courses match the filters above'
         if(this.stolafTableRows.length === 0) {
           this.coursesUnavailable = true;
         }

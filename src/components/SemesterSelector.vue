@@ -17,7 +17,7 @@
           {{ type.text }}
         </option>
       </b-select>
-      <b-switch id="night-mode-switch" v-model="nightMode" @input="modeChanged"><p id="night-mode-text">Night Mode</p></b-switch>
+      <b-switch id="night-mode-switch" v-model="nightMode" @input="newModeSelected"><p id="night-mode-text">Night Mode</p></b-switch>
     </form>
   </div>
 </template>
@@ -131,13 +131,13 @@ export default {
     this.changeSeasonTheme(1)
   },
   methods: {
+    newModeSelected() {
+      this.nightMode ? this.changeSeasonTheme(5) : this.changeSeasonTheme(this.selectedSemester)
+      this.$emit('newModeSelected', this.nightMode)
+    },
     newTypeSelected() {
       console.log('working')
       this.$emit('newTypeSelected', 'type' ,this.selectedType)
-    },
-    modeChanged() {
-      this.nightMode ? this.changeSeasonTheme(5) : this.changeSeasonTheme(this.selectedSemester)
-      this.$emit('newModeSelected', this.nightMode)
     },
     newSemesterSelected() {
       this.$emit('newSemesterSelected', 'semester' , this.selectedSemester)
@@ -168,7 +168,7 @@ export default {
       var contact = document.getElementById('contact')
       var upArrowCircle = document.getElementById('up-arrow-circle')
       var tableColumns = document.getElementsByClassName("table-columns")
-      var tableRows = document.getElementsByClassName("table-rows")
+      var tableRows = document.getElementsByClassName("my-row")
       var vgtSelect = document.getElementsByClassName("vgt-select")
       var vgtInput = document.getElementsByClassName("vgt-input")
       // var upArrowCircle2 = document.getElementById("up-button-circle")
@@ -190,6 +190,8 @@ export default {
       contact.style.background = this.contact[semester]
       upArrowCircle.style.background = this.contact[semester]
       stolafCoursesFooter.style.background = this.contact[semester]
+
+      console.log(this.nightMode)
 
       if(this.nightMode) {
         this.changeElementsStyle(vgtSelect, 'backgroundColor', '#BEBEBE')
