@@ -68,10 +68,13 @@ export default {
         "transparent",
         "transparent",
       ],
+        // "linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%)",
+        // "#ec9f05",
+        // "linear-gradient(150deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%)", 
       tables1: [
-        "linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%)",
-        "linear-gradient(to bottom, #3eadcf, #3eadcf, #3eadcf, #3eadcf, #3eadcf)",                               
-        "linear-gradient(150deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%)", 
+        "hsl(41, 100%, 46%)",
+        "linear-gradient(to bottom, #3eadcf, #3eadcf, #3eadcf, #3eadcf, #3eadcf)",
+        "hsl(10, 69%, 68%)",
         "transparent",
         "transparent",
         "transparent",
@@ -286,11 +289,11 @@ export default {
 }
 
 .spring-img {
-   background: url(../assets/spring-img.jpg) !important
+   background: url(../assets/spring-img.jpg) no-repeat center center fixed!important
 }
 
 .winter-img {
-  background: url('../assets/winter-img.jpg') !important;
+  background: url('../assets/winter-img.jpg') no-repeat center center fixed !important;
 }
 
 .fall-img {

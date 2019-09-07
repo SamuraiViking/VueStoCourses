@@ -24,7 +24,7 @@
       >
       <div slot="table-actions">
         <div id="table-top">
-          <span id="filters-location">Filters are below the headers</span> <b-button v-on:click="resetFilters" id="reset-btn">Reset Filters</b-button> 
+          <b-button v-on:click="resetFilters" id="reset-btn">Reset Filters</b-button> 
         </div>
       </div>
       <div id="stolaf-courses-footer" slot="table-actions-bottom">
@@ -89,6 +89,7 @@
     </div> -->
     <div>
       <button @click="moreInfo" class="stolaf-table-btn" ref="InfoBtn"><i class="material-icons">zoom_in</i></button>
+      <!-- <button @click="moreInfo" class="stolaf-table-btn" ref="InfoBtn">MORE INFO</button> -->
     </div>
   </div>
 </template>
