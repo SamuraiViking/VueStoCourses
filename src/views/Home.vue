@@ -13,7 +13,8 @@
           </div>
           <div>
             <year-selector v-on:newYearSelected="updateSelectedValuesAndRows" id="year-selector" />
-            <semester-selector v-on:newSemesterSelected="updateSelectedValuesAndRows"/>
+            <semester-selector v-on:newSemesterSelected="updateSelectedValuesAndRows"
+                               v-on:newTypeSelected="updateSelectedValuesAndRows"/>
           </div>
         </div>
         <p class="website-header-title" v-if="coursesUnavailable">Courses for this term arn't avaiable yet</p>
@@ -22,7 +23,6 @@
           v-on:showMoreInfo="showMoreInfo"
           v-bind:rows="stolafTableRows"
           v-bind:selectedValues="selectedValues"
-          v-on:rowsChanged="getUserTableRows"
           v-bind:columns="stolafColumns"
           />
       </div>
@@ -93,7 +93,6 @@ export default {
     // window.addEventListener('resize', this.handleResize)
     // this.handleResize();
     this.getStolafTableRows()
-    this.getUserTableRows()
     // this.updateHideOptions(this.visibleColumns)
   },
   destroyed() {
@@ -414,6 +413,7 @@ export default {
       this.updateHideOptions(this.visibleColumns)
     },
     updateSelectedValuesAndRows(key, value) {
+      console.log(value)
       this.selectedValues[key] = value
 
       if(key === 'year' || key === 'semester') {

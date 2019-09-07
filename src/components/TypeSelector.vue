@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-select v-model="selectedType" @input="newTypeSelected">
+    <b-select v-model="selectedType" @input="newTypeSelected" size="is-medium">
       <option v-for="type in types" :value="type.value">
         {{ type.text }}
       </option>

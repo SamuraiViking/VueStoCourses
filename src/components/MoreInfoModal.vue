@@ -6,7 +6,7 @@
            :max-width="800"
            :adaptive="true"
            height="auto"
-           width="80%"
+           width="100%"
            style="margin-bottom: 0px;"
     >
         <div id="info-container" :class="currentSeason()" ref="modalRef">

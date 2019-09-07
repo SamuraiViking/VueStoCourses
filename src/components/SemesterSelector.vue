@@ -9,6 +9,14 @@
           {{ semester.text }}
         </option>
       </b-select>
+      <div style="height: 25px;">
+        
+      </div>
+      <b-select id="type-selector" v-model="selectedType" @input="newTypeSelected" size="is-medium">
+        <option v-for="type in types" :value="type.value">
+          {{ type.text }}
+        </option>
+      </b-select>
       <b-switch id="night-mode-switch" v-model="nightMode" @input="modeChanged"><p id="night-mode-text">Night Mode</p></b-switch>
     </form>
   </div>
@@ -19,6 +27,14 @@ export default {
   name: 'semester-selector',
   data() {
     return {
+      selectedType: 'class',
+      types: [
+        { text: 'Class', value: 'class' },
+        { text: 'Lab', value: 'lab' },
+        { text: 'Independent Study', value: 'IS' },
+        { text: 'Independent Research', value: 'IR' },
+        { text: 'Academic Internship', value: 'AI' },
+      ],
       nightMode: false,
       semesters: [
         { text: 'Fall', value: 1 },
@@ -115,6 +131,10 @@ export default {
     this.changeSeasonTheme(1)
   },
   methods: {
+    newTypeSelected() {
+      console.log('working')
+      this.$emit('newTypeSelected', 'type' ,this.selectedType)
+    },
     modeChanged() {
       this.nightMode ? this.changeSeasonTheme(5) : this.changeSeasonTheme(this.selectedSemester)
       this.$emit('newModeSelected', this.nightMode)
@@ -145,7 +165,7 @@ export default {
       // var pagination = document.getElementsByClassName('vgt-wrap__footer')
       // var navbar = document.getElementsByClassName('navbar')
       var contact = document.getElementById('contact')
-      // var upArrowCircle = document.getElementById('up-arrow-circle')
+      var upArrowCircle = document.getElementById('up-arrow-circle')
       var tableColumns = document.getElementsByClassName("table-columns")
       var tableRows = document.getElementsByClassName("table-rows")
       var vgtSelect = document.getElementsByClassName("vgt-select")
@@ -166,7 +186,7 @@ export default {
       // pagination[0].style.background = this.pagination[semester]
       // navbar[0].style.background = this.navbar[semester]
       contact.style.background = this.contact[semester]
-      // upArrowCircle.style.background = this.contact[semester]
+      upArrowCircle.style.background = this.contact[semester]
       stolafCoursesFooter.style.background = this.contact[semester]
 
       if(this.nightMode) {
@@ -207,6 +227,10 @@ export default {
 </script>
 
 <style>
+
+#term-selector {
+  margin-bottom: 25px;
+}
 
 #night-mode-switch {
   margin-top: 25px;
