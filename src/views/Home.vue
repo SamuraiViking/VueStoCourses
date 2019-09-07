@@ -9,10 +9,10 @@
       <div id="stolaf-section" name="stolaf-courses">
         <div id="stolaf-courses-table-options" class="my-opacity ">
           <div>
-            <h1 class="website-header-title">Stolaf Courses</h1>
+            <h1 class="website-header-title">Stolaf Courses w/ Rate my Professor</h1>
           </div>
           <div>
-            <type-selector v-on:newTypeSelected="updateSelectedValuesAndRows"/>
+            <year-selector v-on:newYearSelected="updateSelectedValuesAndRows" id="year-selector" />
             <semester-selector v-on:newSemesterSelected="updateSelectedValuesAndRows"/>
           </div>
         </div>
@@ -436,7 +436,7 @@ export default {
       var type = this.selectedValues.type
       var term = `${year}${semester}`
       this.coursesUnavailable = false;
-
+      this.stolafTableRows = []
       axios.get(`api/courses?term=${term}&type=${type}`).then(response => {
         this.stolafTableRows = response.data.courses
         if(this.stolafTableRows.length === 0) {
@@ -449,6 +449,10 @@ export default {
 </script>
 
 <style>
+
+#year-selector {
+  margin-bottom: 25px;
+}
 
 #up-button-circle {
   background: orange;

@@ -1,14 +1,15 @@
 <template>
   <div>
     <form>
-      <b-select v-model="selectedSemester"
+      <b-select id="term-selector" v-model="selectedSemester"
+                size="is-medium"
                 @input="newSemesterSelected">
         <option v-for="semester in semesters"
                 :value="semester.value">
           {{ semester.text }}
         </option>
       </b-select>
-      <b-switch v-model="nightMode" @input="modeChanged"><p id="night-mode-text">Night Mode</p></b-switch>
+      <b-switch id="night-mode-switch" v-model="nightMode" @input="modeChanged"><p id="night-mode-text">Night Mode</p></b-switch>
     </form>
   </div>
 </template>
@@ -206,6 +207,10 @@ export default {
 </script>
 
 <style>
+
+#night-mode-switch {
+  margin-top: 25px;
+}
 
 .grey-font {
   color: #BEBEBE !important;
