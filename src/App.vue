@@ -62,7 +62,8 @@ tr {
   color: #2c3e50;
   height: 100%;
   min-height: 1000px;
-  background: url(https://wallpapercave.com/wp/wp3663415.jpg) no-repeat center center fixed; 
+  background: url(https://wallpapercave.com/wp/wp3663415.jpg) no-repeat center center fixed;
+  padding-top: 40px;
 }
 
 .winter-background-color {

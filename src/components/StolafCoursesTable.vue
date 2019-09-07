@@ -15,7 +15,6 @@
       :rows="rows"
       :fixed-header="false"
       styleClass="vgt-table condensed"
-      :pagination-options="paginationOptions"
       :sort-options="{
         initialSortBy: [
           { field: 'rating', type: 'desc' },
@@ -80,9 +79,9 @@
         </div>
       </template>
     </vue-good-table>
-    <div>
+<!--     <div>
       <button @click="addCourse" class="stolaf-table-btn" ref="AddBtn"><i class="material-icons">add</i></button>
-    </div>
+    </div> -->
     <div>
       <button @click="moreInfo" class="stolaf-table-btn" ref="InfoBtn"><i class="material-icons">zoom_in</i></button>
     </div>
@@ -187,14 +186,14 @@ export default {
       var stolafTableWidth = stolafTable.width
       var stolafTableEnd = stolafTableWidth + stolafTableBegin
 
-      var addBtn = this.$refs.AddBtn
+      // var addBtn = this.$refs.AddBtn
       var infoBtn = this.$refs.InfoBtn
 
       if(event.clientY - statusHeaderY > 100) {
-        addBtn.setAttribute('style',
-          `top: ${this.y - 25}px;
-           left: ${stolafTableBegin - 25}px;`
-        )
+        // addBtn.setAttribute('style',
+        //   `top: ${this.y - 25}px;
+        //    left: ${stolafTableBegin - 25}px;`
+        // )
         infoBtn.setAttribute('style',
           `top: ${this.y - 25 }px;
            left: ${stolafTableEnd - 25}px;`
@@ -204,12 +203,12 @@ export default {
       }
     },
     hideActionButtons() {
-      var addBtn = this.$refs.AddBtn
+      // var addBtn = this.$refs.AddBtn
       var infoBtn = this.$refs.InfoBtn
 
-      addBtn.setAttribute('style',
-        `visibility: hidden;`
-      )
+      // addBtn.setAttribute('style',
+      //   `visibility: hidden;`
+      // )
       infoBtn.setAttribute('style',
         `visibility: hidden;`
       )

@@ -136,21 +136,21 @@ export default {
       // Get Elements
       var app = document.getElementById('app')
       var tables = document.getElementsByTagName('table')
-      var header = document.getElementById('website-header')
-      var myCourses = document.getElementById('user-courses-table-options')
+      // var header = document.getElementById('website-header')
+      // var myCourses = document.getElementById('user-courses-table-options')
       var stolafCourses = document.getElementById('stolaf-courses-table-options')
-      var stolafActionBtns = document.getElementsByClassName('stolaf-table-btn')
-      var userActionBtns = document.getElementsByClassName('user-action-btn')
-      var pagination = document.getElementsByClassName('vgt-wrap__footer')
-      var navbar = document.getElementsByClassName('navbar')
+      // var stolafActionBtns = document.getElementsByClassName('stolaf-table-btn')
+      // var userActionBtns = document.getElementsByClassName('user-action-btn')
+      // var pagination = document.getElementsByClassName('vgt-wrap__footer')
+      // var navbar = document.getElementsByClassName('navbar')
       var contact = document.getElementById('contact')
-      var upArrowCircle = document.getElementById('up-arrow-circle')
+      // var upArrowCircle = document.getElementById('up-arrow-circle')
       var tableColumns = document.getElementsByClassName("table-columns")
       var tableRows = document.getElementsByClassName("table-rows")
       var vgtSelect = document.getElementsByClassName("vgt-select")
       var vgtInput = document.getElementsByClassName("vgt-input")
-      var upArrowCircle2 = document.getElementById("up-button-circle")
-      var showBtn = document.getElementById("show-btn")
+      // var upArrowCircle2 = document.getElementById("up-button-circle")
+      // var showBtn = document.getElementById("show-btn")
       var stolafCoursesFooter = document.getElementById('stolaf-courses-footer')
 
 
@@ -158,14 +158,14 @@ export default {
 
       // Set style of elements 
       tables[0].style.background = this.tables1[semester]
-      tables[1].style.background = this.tables2[semester]
-      header.style.background = this.header[semester]
-      myCourses.style.background = this.myCourses[semester]
+      // tables[1].style.background = this.tables2[semester]
+      // header.style.background = this.header[semester]
+      // myCourses.style.background = this.myCourses[semester]
       stolafCourses.style.background = this.stolafCourses[semester]
-      pagination[0].style.background = this.pagination[semester]
-      navbar[0].style.background = this.navbar[semester]
+      // pagination[0].style.background = this.pagination[semester]
+      // navbar[0].style.background = this.navbar[semester]
       contact.style.background = this.contact[semester]
-      upArrowCircle.style.background = this.contact[semester]
+      // upArrowCircle.style.background = this.contact[semester]
       stolafCoursesFooter.style.background = this.contact[semester]
 
       if(this.nightMode) {

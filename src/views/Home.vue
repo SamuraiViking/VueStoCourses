@@ -1,40 +1,10 @@
 <template>
   <div id="home">
-    <my-nav-bar />
     <div id="body-container" @mouseover="mouseOverBody">
       <!-- Top Section Above Table -->
       <more-info-modal v-bind:moreInfoData="moreInfoData"
                        v-bind:modalName="'more-info'"
                        v-bind:nightMode="nightMode"/>
-      <div id="website-header" class="my-opacity ">
-        <div id="top-section">
-          <div id="top-section-selectors">
-          <p class="website-header-title">Rate my Professor Course Planner</p>
-            <year-selector v-on:newYearSelected="updateSelectedValuesAndRows"/>
-            <semester-selector v-on:newSemesterSelected="updateSelectedValuesAndRows" v-on:newModeSelected="newModeSelected"/>
-          </div>
-        </div>
-      </div>
-      <!-- User Table -->
-      <div id="user-section">
-        <div id="user-courses-table-options" class="my-opacity">
-          <div>
-            <h1 id="my-courses-header" class="website-header-title">My Courses</h1>
-          </div>
-          <div>
-            <draft-selector style="margin-top: 20px;" v-on:newDraftSelected="updateSelectedValuesAndRows"
-                                                      v-bind:selectedDraft="selectedValues.draft"/>
-          </div>
-        </div>
-        <user-courses-table
-          v-bind:rows="userTableRows"
-          v-bind:nightMode="nightMode"
-          v-bind:selectedValues="selectedValues"
-          v-on:rowsChanged="getUserTableRows"
-          v-bind:columns="userColumns"
-          v-on:showMoreInfo="showMoreInfo"
-          />
-      </div>
       <!-- Stolaf Table -->
       <div id="stolaf-section" name="stolaf-courses">
         <div id="stolaf-courses-table-options" class="my-opacity ">
@@ -43,6 +13,7 @@
           </div>
           <div>
             <type-selector v-on:newTypeSelected="updateSelectedValuesAndRows"/>
+            <semester-selector v-on:newSemesterSelected="updateSelectedValuesAndRows"/>
           </div>
         </div>
         <p class="website-header-title" v-if="coursesUnavailable">Courses for this term arn't avaiable yet</p>
@@ -363,6 +334,12 @@ export default {
           hidden: false,
           type: 'number'
         },
+        {
+          label: 'Actions', 
+          field: 'actions',
+          hidden: false,
+          type: 'number'
+        },
       ],
       /* Makes column multiselect visible when Hide columns button is pressed */
       showHideOptions: false,
@@ -467,18 +444,6 @@ export default {
         }
       })
     },
-    /* Get User Courses from backend API */
-    getUserTableRows() {
-      var year = this.selectedValues.year
-      var semester = this.selectedValues.semester
-      var draft = this.selectedValues.draft
-      var type = this.selectedValues.type
-      var term = `${year}${semester}`
-
-      axios.get(`api/terms?term=${term}&order=${draft}`).then(response => {
-        this.userTableRows = response.data[0].courses
-      })
-    }
   }
 }
 </script>
