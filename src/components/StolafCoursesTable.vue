@@ -119,7 +119,6 @@ export default {
     DraftSelector
   },
   created() {
-    console.log(this.tableText)
   },
   data() {
     return {
@@ -181,7 +180,6 @@ export default {
       this.hoveredRow = props.row
     },
     updateMousePosition(event) {
-      // console.log('moving')
 
       this.x = event.pageX
       this.y = event.pageY

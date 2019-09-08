@@ -43,13 +43,6 @@ html {
   overflow: scroll;
 }
 
-tr {
-}
-
-.footer__navigation__page-info__current-entry {
-  color: black !important;
-}
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -63,7 +56,7 @@ tr {
   height: 100%;
   min-height: 1000px;
   background: url(https://wallpapercave.com/wp/wp3663415.jpg) no-repeat center center fixed;
-  padding-top: 40px;
+  padding-top: 70px;
 }
 
 .winter-background-color {

@@ -17,7 +17,7 @@
           {{ type.text }}
         </option>
       </b-select>
-      <b-switch id="night-mode-switch" v-model="nightMode" @input="newModeSelected"><p id="night-mode-text">Night Mode</p></b-switch>
+      <b-switch id="night-mode-switch" size="is-medium" v-model="nightMode" @input="newModeSelected"><p id="night-mode-text">Night Mode</p></b-switch>
     </form>
   </div>
 </template>
@@ -73,8 +73,8 @@ export default {
         // "linear-gradient(150deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%)", 
       tables1: [
         "hsl(41, 100%, 46%)",
-        "linear-gradient(to bottom, #3eadcf, #3eadcf, #3eadcf, #3eadcf, #3eadcf)",
-        "hsl(10, 69%, 68%)",
+        "#3eadcf",
+        "#e68875",
         "transparent",
         "transparent",
         "transparent",
@@ -139,7 +139,6 @@ export default {
       this.$emit('newModeSelected', this.nightMode)
     },
     newTypeSelected() {
-      console.log('working')
       this.$emit('newTypeSelected', 'type' ,this.selectedType)
     },
     newSemesterSelected() {
@@ -194,7 +193,6 @@ export default {
       upArrowCircle.style.background = this.contact[semester]
       stolafCoursesFooter.style.background = this.contact[semester]
 
-      console.log(this.nightMode)
 
       if(this.nightMode) {
         this.changeElementsStyle(vgtSelect, 'backgroundColor', '#BEBEBE')

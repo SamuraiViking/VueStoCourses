@@ -86,8 +86,8 @@ export default {
 }
 
 .winter-color {
-  /*background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);*/
-  background: linear-gradient(315deg, #abe9cd 0%, #3eadcf 30%);
+  /*background: linear-gradient(315deg, #abe9cd 0%, #3eadcf 30%);*/
+  background: hsl(194, 40%, 50%);
 }
 
 .fall-color {
@@ -95,7 +95,8 @@ export default {
   background: linear-gradient(315deg, #ff4e00 0%, #ec9f05 30%);
   background: linear-gradient(315deg, #ec9f05 0%,#ff4e00 30%);
   background: linear-gradient(315deg, #ec9e05 0%, #ec6b05 30%);
-  background: #ff8f00,
+  background: #ff8f00;
+  background: hsl(41, 100%, 43%);
 }
 
 #modal-top {
@@ -104,6 +105,7 @@ export default {
 
 .night-theme {
   color: #BEBEBE;
+  text-shadow: 1px 1px 0 #444;
 }
 
 #close-btn {
@@ -126,7 +128,8 @@ export default {
 }
 
 .spring-color {
-  background: linear-gradient(150deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%)
+  background: linear-gradient(150deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+  background: hsl(10, 60%, 68%);
 }
 
 .summer1-color {
@@ -153,7 +156,6 @@ export default {
 
 .modal-label {
   font-weight: 900;
-  /*color: #eee;*/
   font-size: 20px;
   font-weight: 900;
 }
@@ -178,7 +180,6 @@ export default {
 
 #info-container {
   max-height: 800px;
-  /*max-width: 600px;*/
   overflow-y: scroll;
   padding: 30px;
 }

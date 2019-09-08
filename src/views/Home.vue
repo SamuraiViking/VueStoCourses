@@ -20,7 +20,6 @@
         </div>
         <p class="website-header-title" v-if="coursesUnavailable">Courses for this term arn't avaiable yet</p>
         <stolaf-courses-table
-          v-if="showTable"
           v-bind:tableText="tableText"
           v-on:resetFilters="resetFilters"
           v-bind:nightMode="nightMode"
@@ -539,7 +538,6 @@ export default {
       this.getStolafTableRows()
     },
     newModeSelected(mode) {
-      console.log(mode)
       this.nightMode = mode
     },
     mouseOverBody(event) {
@@ -591,19 +589,14 @@ export default {
       return data <= Number(filterString)
     },
     updateSelectedValuesAndRows(key, value) {
-      console.log(value)
       this.selectedValues[key] = value
 
       if(key === 'year' || key === 'semester') {
         this.selectedValues.draft = 1
         this.getStolafTableRows()
-        this.getUserTableRows()
       }
       else if (key === 'type') {
         this.getStolafTableRows()
-      }
-      else if (key === 'draft') {
-        this.getUserTableRows()
       }
     },
     /* Get Stolaf Courses from backend API */
