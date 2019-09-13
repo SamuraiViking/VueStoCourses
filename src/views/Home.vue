@@ -252,6 +252,7 @@ export default {
           hidden: false,
           filterOptions: {
             placeholder: "Search",
+            filterValue: "",
             enabled: true
           }
         },
@@ -424,6 +425,7 @@ export default {
           hidden: false,
           filterOptions: {
             placeholder: "Search",
+            filterValue: "",
             enabled: true
           }
         },
