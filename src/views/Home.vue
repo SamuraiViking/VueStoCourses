@@ -483,56 +483,7 @@ export default {
           type: "number"
         }
       ],
-
       /* Number used to switch stolafColumns1 to stolafColumns2 and vise versa */
-      userColumns: [
-        {
-          label: "Status",
-          field: "status",
-          hidden: false
-        },
-        { label: "Name", field: "name", hidden: false },
-        {
-          label: "Dept",
-          field: "dept",
-          hidden: false
-        },
-        {
-          label: "Num",
-          field: "num"
-        },
-        {
-          label: "Gereqs",
-          field: "gereqs",
-          hidden: false
-        },
-        {
-          label: "Days",
-          field: "days",
-          hidden: false
-        },
-        { label: "Times", field: "times", hidden: false },
-        { label: "Prof", field: "prof", hidden: false },
-        { label: "Rating", field: "rating", hidden: false, type: "number" },
-        {
-          label: "Difficulty",
-          field: "difficulty",
-          hidden: false,
-          type: "number"
-        },
-        {
-          label: "Reviews",
-          field: "reviews",
-          hidden: false,
-          type: "number"
-        },
-        {
-          label: "Actions",
-          field: "actions",
-          hidden: false,
-          type: "number"
-        }
-      ],
       /* Makes column multiselect visible when Hide columns button is pressed */
       showHideOptions: false,
       userTableRows: [],
