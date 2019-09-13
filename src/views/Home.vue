@@ -2,23 +2,30 @@
   <div id="home">
     <div id="body-container" @mouseover="mouseOverBody">
       <!-- Top Section Above Table -->
-      <more-info-modal v-bind:moreInfoData="moreInfoData"
-                       v-bind:modalName="'more-info'"
-                       v-bind:nightMode="nightMode"/>
+      <more-info-modal
+        v-bind:moreInfoData="moreInfoData"
+        v-bind:modalName="'more-info'"
+        v-bind:nightMode="nightMode"
+      />
       <!-- Stolaf Table -->
       <div id="stolaf-section" name="stolaf-courses">
-        <div id="stolaf-courses-table-options" class="my-opacity ">
+        <div id="stolaf-courses-table-options" class="my-opacity">
           <div>
             <h1 class="website-header-title">Stolaf Courses w/ Rate my Professor</h1>
           </div>
           <div>
             <year-selector v-on:newYearSelected="updateSelectedValuesAndRows" id="year-selector" />
-            <semester-selector v-on:newSemesterSelected="updateSelectedValuesAndRows"
-                               v-on:newModeSelected="newModeSelected"
-                               v-on:newTypeSelected="updateSelectedValuesAndRows"/>
+            <semester-selector
+              v-on:newSemesterSelected="updateSelectedValuesAndRows"
+              v-on:newModeSelected="newModeSelected"
+              v-on:newTypeSelected="updateSelectedValuesAndRows"
+            />
           </div>
         </div>
-        <p class="website-header-title" v-if="coursesUnavailable">Courses for this term arn't avaiable yet</p>
+        <p
+          class="website-header-title"
+          v-if="coursesUnavailable"
+        >Courses for this term arn't avaiable yet</p>
         <stolaf-courses-table
           v-bind:tableText="tableText"
           v-on:resetFilters="resetFilters"
@@ -27,7 +34,7 @@
           v-bind:rows="stolafTableRows"
           v-bind:selectedValues="selectedValues"
           v-bind:columns="columns()"
-          />
+        />
       </div>
     </div>
     <div id="up-arrow-container">
@@ -40,19 +47,31 @@
     <div id="contact">
       <div id="contact-container">
         <div id="contact-left">
-          <p id="contact-middle-top1"><i class="material-icons">email</i></p>
-          <p><i class="material-icons">phone</i></p>
+          <p id="contact-middle-top1">
+            <i class="material-icons">email</i>
+          </p>
+          <p>
+            <i class="material-icons">phone</i>
+          </p>
         </div>
         <div id="contact-middle">
-          <p id="contact-middle-top2"><span>nelson67@stolaf.edu</span></p>
-          <p><span>612-236-5220</span></p>
+          <p id="contact-middle-top2">
+            <span>nelson67@stolaf.edu</span>
+          </p>
+          <p>
+            <span>612-236-5220</span>
+          </p>
         </div>
         <div id="contact-right">
           <a target="blank" href="https://github.com/SamuraiViking">
-            <p><img src="../assets/github-light-32.png"></p>
+            <p>
+              <img src="../assets/github-light-32.png" />
+            </p>
           </a>
           <a href="https://www.linkedin.com/in/kevin-nelson1/" target="blank">
-            <p><img src="../assets/linkedin-32.png"></p>
+            <p>
+              <img src="../assets/linkedin-32.png" />
+            </p>
           </a>
         </div>
       </div>
@@ -61,24 +80,24 @@
 </template>
 
 <script>
-import axios from 'axios'
-import StolafCoursesTable from '@/components/StolafCoursesTable.vue'
-import MyNavBar from '@/components/MyNavBar.vue'
-import UserCoursesTable from '@/components/UserCoursesTable'
-import YearSelector from '@/components/YearSelector.vue'
-import SemesterSelector from '@/components/SemesterSelector.vue'
-import DraftSelector from '@/components/DraftSelector.vue'
-import TypeSelector from '@/components/TypeSelector.vue'
-import HideOptions from '@/components/HideOptions.vue'
-import { departments } from '@/components/dropDownItems/Departments'
-import { ges } from '@/components/dropDownItems/Ges'
-import MoreInfoModal from '@/components/MoreInfoModal.vue'
-import MobileTable from '@/components/MobileTable.vue'
-import FiltersModal from '@/components/FiltersModal.vue'
-import 'buefy/dist/buefy.css'
+import axios from "axios";
+import StolafCoursesTable from "@/components/StolafCoursesTable.vue";
+import MyNavBar from "@/components/MyNavBar.vue";
+import UserCoursesTable from "@/components/UserCoursesTable";
+import YearSelector from "@/components/YearSelector.vue";
+import SemesterSelector from "@/components/SemesterSelector.vue";
+import DraftSelector from "@/components/DraftSelector.vue";
+import TypeSelector from "@/components/TypeSelector.vue";
+import HideOptions from "@/components/HideOptions.vue";
+import { departments } from "@/components/dropDownItems/Departments";
+import { ges } from "@/components/dropDownItems/Ges";
+import MoreInfoModal from "@/components/MoreInfoModal.vue";
+import MobileTable from "@/components/MobileTable.vue";
+import FiltersModal from "@/components/FiltersModal.vue";
+import "buefy/dist/buefy.css";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     MyNavBar,
     FiltersModal,
@@ -95,7 +114,7 @@ export default {
   created() {
     // window.addEventListener('resize', this.handleResize)
     // this.handleResize();
-    this.getStolafTableRows()
+    this.getStolafTableRows();
     // this.updateHideOptions(this.visibleColumns)
   },
   destroyed() {
@@ -103,7 +122,7 @@ export default {
   },
   data() {
     return {
-      tableText: 'loading ... ',
+      tableText: "loading ... ",
       showTable: true,
       switch: true,
       nightMode: false,
@@ -116,404 +135,401 @@ export default {
       },
       /* Info Shown on more info modal */
       moreInfoData: {},
-      /* Two Stolaf Columns that switch back and forth when Reset Filters button is pressed */ 
+      /* Two Stolaf Columns that switch back and forth when Reset Filters button is pressed */
+
       stolafColumns: [
         {
-          label: 'Status', 
-          field: 'status',
+          label: "Status",
+          field: "status",
           hidden: false,
           filterOptions: {
-            placeholder: 'All',
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              {text: 'Open', value: 'O'},
-              {text: 'Closed', value: 'C'},
-            ],
-          }
-        },
-        { 
-          label: 'Name', 
-          field: 'name',
-          hidden: false,
-          filterOptions: {
-            placeholder: 'Search',
-            filterValue: '',
-            enabled: true,
-          }
-        },
-        { 
-          label: 'Dept', 
-          field: 'dept',
-          hidden: false,
-          filterOptions: {
-            enabled: true,
-            filterValue: '',
-            placeholder: 'All',
-            filterDropdownItems: departments(),
+              { text: "Open", value: "O" },
+              { text: "Closed", value: "C" }
+            ]
           }
         },
         {
-          label: 'Num',
-          field: 'num',
-          type: 'number',
+          label: "Name",
+          field: "name",
+          hidden: false,
+          filterOptions: {
+            placeholder: "Search",
+            filterValue: "",
+            enabled: true
+          }
+        },
+        {
+          label: "Dept",
+          field: "dept",
+          hidden: false,
           filterOptions: {
             enabled: true,
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
+            filterDropdownItems: departments()
+          }
+        },
+        {
+          label: "Num",
+          field: "num",
+          type: "number",
+          filterOptions: {
+            enabled: true,
+            filterValue: "",
+            placeholder: "All",
             filterDropdownItems: [
-              { text: '100', value: 100 },
-              { text: '200', value: 200 },
-              { text: '300', value: 300 },
+              { text: "100", value: 100 },
+              { text: "200", value: 200 },
+              { text: "300", value: 300 }
             ],
             filterFn: this.numFilterFn
           }
         },
         {
-          label: "Ge's", 
-          field: 'gereqs',
+          label: "Ge's",
+          field: "gereqs",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'Any',
+            filterValue: "",
+            placeholder: "Any",
             enabled: true,
             filterDropdownItems: ges()
           }
         },
         {
-          label: 'Days', 
-          field: 'days',
+          label: "Days",
+          field: "days",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              'MWF',
-              'TTh',
-              'M-F',
-              'M',
-              'Tu',
-              'W',
-              'Th',
-              'F',
-              'Other'
+              "MWF",
+              "TTh",
+              "M-F",
+              "M",
+              "Tu",
+              "W",
+              "Th",
+              "F",
+              "Other"
             ],
             filterFn: this.daysFilterFn
           }
         },
-        { label: 'Times', 
-          field: 'times',
+        {
+          label: "Times",
+          field: "times",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              { text: '8 am', value: '08' },
-              { text: '9 am', value: '09' },
-              { text: '10 am', value: '10' },
-              { text: '11 am', value: '11' },
-              { text: '12', value: '12' },
-              { text: '1 pm', value: '13' },
-              { text: '2 pm', value: '14' },
-              { text: '3 pm', value: '15' },
-              { text: '4 pm', value: '16' },
-              { text: '5 pm', value: '17' },
-              { text: '6 pm', value: '18' },
-              { text: '7 pm', value: '19' },
+              { text: "8 am", value: "08" },
+              { text: "9 am", value: "09" },
+              { text: "10 am", value: "10" },
+              { text: "11 am", value: "11" },
+              { text: "12", value: "12" },
+              { text: "1 pm", value: "13" },
+              { text: "2 pm", value: "14" },
+              { text: "3 pm", value: "15" },
+              { text: "4 pm", value: "16" },
+              { text: "5 pm", value: "17" },
+              { text: "6 pm", value: "18" },
+              { text: "7 pm", value: "19" }
             ],
             filterFn: this.timesFilterFn
           }
         },
-        { label: 'Prof', 
-          field: 'prof',
+        {
+          label: "Prof",
+          field: "prof",
           hidden: false,
           filterOptions: {
-            placeholder: 'Search',
-            enabled: true,
+            placeholder: "Search",
+            enabled: true
           }
         },
-        { label: 'Rating', 
-          field: 'rating',
+        {
+          label: "Rating",
+          field: "rating",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              { text: '1 or more', value: 1 },
-              { text: '2 or more', value: 2 },
-              { text: '3 or more', value: 3 },
-              { text: '4 or more', value: 4 },
+              { text: "1 or more", value: 1 },
+              { text: "2 or more", value: 2 },
+              { text: "3 or more", value: 3 },
+              { text: "4 or more", value: 4 }
             ],
             filterFn: this.ratingFilterFn
           },
-          type: 'number'
+          type: "number"
         },
-        { label: 'Difficulty', 
-          field: 'difficulty',
+        {
+          label: "Difficulty",
+          field: "difficulty",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              { text: '2 or less', value: 2 },
-              { text: '3 or less', value: 3 },
-              { text: '4 or less', value: 4 },
+              { text: "2 or less", value: 2 },
+              { text: "3 or less", value: 3 },
+              { text: "4 or less", value: 4 }
             ],
             filterFn: this.difficultyFilterFn
           },
-          type: 'number'
+          type: "number"
         },
         {
-          label: 'Reviews', 
-          field: 'reviews',
+          label: "Reviews",
+          field: "reviews",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterFn: this.reviewsFilterFn,
             filterDropdownItems: [
-              { text: '5 or more', value: 5 },
-              { text: '10 or more', value: 10 },
-              { text: '15 or more', value: 15 },
-              { text: '20 or more', value: 20 },
+              { text: "5 or more", value: 5 },
+              { text: "10 or more", value: 10 },
+              { text: "15 or more", value: 15 },
+              { text: "20 or more", value: 20 }
             ]
           },
-          type: 'number'
+          type: "number"
         }
       ],
       stolafColumns1: [
         {
-          label: 'Status', 
-          field: 'status',
+          label: "Status",
+          field: "status",
           hidden: false,
           filterOptions: {
-            placeholder: 'All',
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              {text: 'Open', value: 'O'},
-              {text: 'Closed', value: 'C'},
-            ],
-          }
-        },
-        { 
-          label: 'Name', 
-          field: 'name',
-          hidden: false,
-          filterOptions: {
-            placeholder: 'Search',
-            filterValue: '',
-            enabled: true,
-          }
-        },
-        { 
-          label: 'Dept', 
-          field: 'dept',
-          hidden: false,
-          filterOptions: {
-            enabled: true,
-            filterValue: '',
-            placeholder: 'All',
-            filterDropdownItems: departments(),
+              { text: "Open", value: "O" },
+              { text: "Closed", value: "C" }
+            ]
           }
         },
         {
-          label: 'Num',
-          field: 'num',
-          type: 'number',
+          label: "Name",
+          field: "name",
+          hidden: false,
+          filterOptions: {
+            placeholder: "Search",
+            filterValue: "",
+            enabled: true
+          }
+        },
+        {
+          label: "Dept",
+          field: "dept",
+          hidden: false,
           filterOptions: {
             enabled: true,
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
+            filterDropdownItems: departments()
+          }
+        },
+        {
+          label: "Num",
+          field: "num",
+          type: "number",
+          filterOptions: {
+            enabled: true,
+            filterValue: "",
+            placeholder: "All",
             filterDropdownItems: [
-              { text: '100', value: 100 },
-              { text: '200', value: 200 },
-              { text: '300', value: 300 },
+              { text: "100", value: 100 },
+              { text: "200", value: 200 },
+              { text: "300", value: 300 }
             ],
             filterFn: this.numFilterFn
           }
         },
         {
-          label: "Ge's", 
-          field: 'gereqs',
+          label: "Ge's",
+          field: "gereqs",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'Any',
+            filterValue: "",
+            placeholder: "Any",
             enabled: true,
             filterDropdownItems: ges()
           }
         },
         {
-          label: 'Days', 
-          field: 'days',
+          label: "Days",
+          field: "days",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              'MWF',
-              'TTh',
-              'M-F',
-              'M',
-              'Tu',
-              'W',
-              'Th',
-              'F',
-              'Other'
+              "MWF",
+              "TTh",
+              "M-F",
+              "M",
+              "Tu",
+              "W",
+              "Th",
+              "F",
+              "Other"
             ],
             filterFn: this.daysFilterFn
           }
         },
-        { label: 'Times', 
-          field: 'times',
+        {
+          label: "Times",
+          field: "times",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              { text: '8 am', value: '08' },
-              { text: '9 am', value: '09' },
-              { text: '10 am', value: '10' },
-              { text: '11 am', value: '11' },
-              { text: '12', value: '12' },
-              { text: '1 pm', value: '13' },
-              { text: '2 pm', value: '14' },
-              { text: '3 pm', value: '15' },
-              { text: '4 pm', value: '16' },
-              { text: '5 pm', value: '17' },
-              { text: '6 pm', value: '18' },
-              { text: '7 pm', value: '19' },
+              { text: "8 am", value: "08" },
+              { text: "9 am", value: "09" },
+              { text: "10 am", value: "10" },
+              { text: "11 am", value: "11" },
+              { text: "12", value: "12" },
+              { text: "1 pm", value: "13" },
+              { text: "2 pm", value: "14" },
+              { text: "3 pm", value: "15" },
+              { text: "4 pm", value: "16" },
+              { text: "5 pm", value: "17" },
+              { text: "6 pm", value: "18" },
+              { text: "7 pm", value: "19" }
             ],
             filterFn: this.timesFilterFn
           }
         },
-        { label: 'Prof', 
-          field: 'prof',
+        {
+          label: "Prof",
+          field: "prof",
           hidden: false,
           filterOptions: {
-            placeholder: 'Search',
-            enabled: true,
+            placeholder: "Search",
+            enabled: true
           }
         },
-        { label: 'Rating', 
-          field: 'rating',
+        {
+          label: "Rating",
+          field: "rating",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              { text: '1 or more', value: 1 },
-              { text: '2 or more', value: 2 },
-              { text: '3 or more', value: 3 },
-              { text: '4 or more', value: 4 },
+              { text: "1 or more", value: 1 },
+              { text: "2 or more", value: 2 },
+              { text: "3 or more", value: 3 },
+              { text: "4 or more", value: 4 }
             ],
             filterFn: this.ratingFilterFn
           },
-          type: 'number'
+          type: "number"
         },
-        { label: 'Difficulty', 
-          field: 'difficulty',
+        {
+          label: "Difficulty",
+          field: "difficulty",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterDropdownItems: [
-              { text: '2 or less', value: 2 },
-              { text: '3 or less', value: 3 },
-              { text: '4 or less', value: 4 },
+              { text: "2 or less", value: 2 },
+              { text: "3 or less", value: 3 },
+              { text: "4 or less", value: 4 }
             ],
             filterFn: this.difficultyFilterFn
           },
-          type: 'number'
+          type: "number"
         },
         {
-          label: 'Reviews', 
-          field: 'reviews',
+          label: "Reviews",
+          field: "reviews",
           hidden: false,
           filterOptions: {
-            filterValue: '',
-            placeholder: 'All',
+            filterValue: "",
+            placeholder: "All",
             enabled: true,
             filterFn: this.reviewsFilterFn,
             filterDropdownItems: [
-              { text: '5 or more', value: 5 },
-              { text: '10 or more', value: 10 },
-              { text: '15 or more', value: 15 },
-              { text: '20 or more', value: 20 },
+              { text: "5 or more", value: 5 },
+              { text: "10 or more", value: 10 },
+              { text: "15 or more", value: 15 },
+              { text: "20 or more", value: 20 }
             ]
           },
-          type: 'number'
+          type: "number"
         }
       ],
 
       /* Number used to switch stolafColumns1 to stolafColumns2 and vise versa */
       userColumns: [
         {
-          label: 'Status', 
-          field: 'status',
-          hidden: false,
+          label: "Status",
+          field: "status",
+          hidden: false
         },
-        { label: 'Name', 
-          field: 'name',
-          hidden: false,
-        },
-        { 
-          label: 'Dept', 
-          field: 'dept',
-          hidden: false,
+        { label: "Name", field: "name", hidden: false },
+        {
+          label: "Dept",
+          field: "dept",
+          hidden: false
         },
         {
-          label: 'Num',
-          field: 'num',
+          label: "Num",
+          field: "num"
         },
         {
-          label: 'Gereqs', 
-          field: 'gereqs',
-          hidden: false,
+          label: "Gereqs",
+          field: "gereqs",
+          hidden: false
         },
         {
-          label: 'Days', 
-          field: 'days',
-          hidden: false,
+          label: "Days",
+          field: "days",
+          hidden: false
         },
-        { label: 'Times', 
-          field: 'times',
+        { label: "Times", field: "times", hidden: false },
+        { label: "Prof", field: "prof", hidden: false },
+        { label: "Rating", field: "rating", hidden: false, type: "number" },
+        {
+          label: "Difficulty",
+          field: "difficulty",
           hidden: false,
-        },
-        { label: 'Prof', 
-          field: 'prof',
-          hidden: false,
-        },
-        { label: 'Rating', 
-          field: 'rating',
-          hidden: false,
-          type: 'number'
-        },
-        { label: 'Difficulty', 
-          field: 'difficulty',
-          hidden: false,
-          type: 'number'
+          type: "number"
         },
         {
-          label: 'Reviews', 
-          field: 'reviews',
+          label: "Reviews",
+          field: "reviews",
           hidden: false,
-          type: 'number'
+          type: "number"
         },
         {
-          label: 'Actions', 
-          field: 'actions',
+          label: "Actions",
+          field: "actions",
           hidden: false,
-          type: 'number'
-        },
+          type: "number"
+        }
       ],
       /* Makes column multiselect visible when Hide columns button is pressed */
       showHideOptions: false,
@@ -524,105 +540,103 @@ export default {
         year: 2019,
         semester: 1,
         draft: 1,
-        type: 'class'
+        type: "class"
       }
-    }
+    };
   },
   methods: {
     columns() {
-      return this.switch ? this.stolafColumns : this.stolafColumns1
+      return this.switch ? this.stolafColumns : this.stolafColumns1;
     },
     resetFilters() {
-      this.tableText = 'loading ... '
-      this.switch = !this.switch
-      this.getStolafTableRows()
+      this.tableText = "loading ... ";
+      this.switch = !this.switch;
+      this.getStolafTableRows();
     },
     newModeSelected(mode) {
-      this.nightMode = mode
+      this.nightMode = mode;
     },
-    mouseOverBody(event) {
-    },
-    newYearSelected() {
-    },
+    mouseOverBody(event) {},
+    newYearSelected() {},
     filtersModal() {
-      this.$modal.show('filters')
+      this.$modal.show("filters");
     },
     screenWidthLessThan(width) {
-      return this.window.width < width
+      return this.window.width < width;
     },
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
     },
     showMoreInfo(row) {
-      this.moreInfoData = row
-      this.$modal.show('more-info')
+      this.moreInfoData = row;
+      this.$modal.show("more-info");
     },
     daysFilterFn(data, filterString) {
-      var filterStrings = ['MWF', 'TTh', 'M-F','M', 'Tu', 'W', 'Th', 'F']
-      return filterString === 'Other' ? !filterStrings.includes(data) : data === filterString
+      var filterStrings = ["MWF", "TTh", "M-F", "M", "Tu", "W", "Th", "F"];
+      return filterString === "Other"
+        ? !filterStrings.includes(data)
+        : data === filterString;
     },
-    numFilterFn(data ,filterString) {
-      return data.toString()[0] === filterString[0]
+    numFilterFn(data, filterString) {
+      return data.toString()[0] === filterString[0];
     },
     timesFilterFn(data, filterString) {
-      data = data.split(',')
-      data = data.join('-')
-      data = data.split('-')
+      data = data.split(",");
+      data = data.join("-");
+      data = data.split("-");
       data = data.filter((elem, idx) => {
         return idx % 2 === 0;
-      })
-      data = data.join(':')
-      data = data.split(':')
+      });
+      data = data.join(":");
+      data = data.split(":");
       data = data.filter((elem, idx) => {
         return idx % 2 === 0;
-      })
-      return data.includes(filterString)
+      });
+      return data.includes(filterString);
     },
     reviewsFilterFn(data, filterString) {
-      return data >= Number(filterString)
+      return data >= Number(filterString);
     },
     ratingFilterFn(data, filterString) {
-      return data >= Number(filterString)
+      return data >= Number(filterString);
     },
     difficultyFilterFn(data, filterString) {
-      return data <= Number(filterString)
+      return data <= Number(filterString);
     },
     updateSelectedValuesAndRows(key, value) {
-      this.selectedValues[key] = value
+      this.selectedValues[key] = value;
 
-      if(key === 'year' || key === 'semester') {
-        this.selectedValues.draft = 1
-        this.getStolafTableRows()
-      }
-      else if (key === 'type') {
-        this.getStolafTableRows()
+      if (key === "year" || key === "semester") {
+        this.selectedValues.draft = 1;
+        this.getStolafTableRows();
+      } else if (key === "type") {
+        this.getStolafTableRows();
       }
     },
     /* Get Stolaf Courses from backend API */
     getStolafTableRows() {
-      var year = this.selectedValues.year
-      var semester = this.selectedValues.semester
-      var draft = this.selectedValues.draft
-      var type = this.selectedValues.type
-      var term = `${year}${semester}`
+      var year = this.selectedValues.year;
+      var semester = this.selectedValues.semester;
+      var draft = this.selectedValues.draft;
+      var type = this.selectedValues.type;
+      var term = `${year}${semester}`;
       this.coursesUnavailable = false;
-      this.stolafTableRows = []
-      this.tableText = 'loading ... '
+      this.stolafTableRows = [];
+      this.tableText = "loading ... ";
       axios.get(`api/courses?term=${term}&type=${type}`).then(response => {
-        this.stolafTableRows = response.data.courses
-        this.tableText = 'no courses match the filters above'
-        if(this.stolafTableRows.length === 0) {
+        this.stolafTableRows = response.data.courses;
+        this.tableText = "no courses match the filters above";
+        if (this.stolafTableRows.length === 0) {
           this.coursesUnavailable = true;
         }
-      })
-    },
+      });
+    }
   }
-}
+};
 </script>
 
 <style>
-
 #year-selector {
   margin-bottom: 25px;
 }
@@ -679,7 +693,7 @@ export default {
 }
 
 #logo-list {
-/*  width: 50%;
+  /*  width: 50%;
   margin: 0px auto;
   display: flex;
   justify-content: space-between;*/
@@ -708,11 +722,9 @@ export default {
   margin-right: 20px;
 }
 
-
 #body-container {
   padding: 0 5%;
 }
-
 
 #desktop {
   padding-top: 50px;
@@ -779,8 +791,6 @@ export default {
   margin-bottom: 5px;
 }
 
-
-
 #top-section-selectors button {
   border-radius: 5px;
 }
@@ -821,6 +831,4 @@ export default {
 #stolaf-courses-table-options * {
   text-align: center;
 }
-
-
 </style>
