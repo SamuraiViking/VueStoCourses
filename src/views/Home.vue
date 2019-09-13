@@ -112,6 +112,7 @@ export default {
     HideOptions
   },
   created() {
+    document.title = "StoCourses"
     // window.addEventListener('resize', this.handleResize)
     // this.handleResize();
     this.getStolafTableRows();
