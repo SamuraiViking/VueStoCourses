@@ -486,8 +486,6 @@ export default {
       ],
       /* Number used to switch stolafColumns1 to stolafColumns2 and vise versa */
       /* Makes column multiselect visible when Hide columns button is pressed */
-      showHideOptions: false,
-      userTableRows: [],
       stolafTableRows: [],
       /* Default Values */
       selectedValues: {

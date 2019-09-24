@@ -25,8 +25,8 @@ import Buefy from 'buefy'
 Vue.use(Buefy)
 
 
-axios.defaults.baseURL =
-  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/"
+axios.defaults.baseURL = "https://stocourses.herokuapp.com/"
+  // process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/"
 
 Vue.config.productionTip = false
 Vue.use(VueGoodTablePlugin);
