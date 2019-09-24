@@ -44,7 +44,7 @@ export default {
 <style>
 
 html {
-  overflow: scroll;
+  /*overflow: scroll;*/
 }
 
 #app {
