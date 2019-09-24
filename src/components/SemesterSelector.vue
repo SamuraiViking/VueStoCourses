@@ -131,7 +131,7 @@ export default {
     }
   },
   mounted() {
-    this.nightMode = window.innerWidth <= 300;
+    this.nightMode = window.innerWidth <= 500;
     this.changeSeasonTheme(1)
   },
   methods: {
