@@ -329,6 +329,7 @@ export default {
 }
 
 #table-top {
+  display: flex;
   /*background: blue;*/
   width: 100%;
   padding: 5px;

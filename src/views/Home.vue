@@ -113,10 +113,7 @@ export default {
   },
   created() {
     document.title = "StoCourses"
-    // window.addEventListener('resize', this.handleResize)
-    // this.handleResize();
     this.getStolafTableRows();
-    // this.updateHideOptions(this.visibleColumns)
   },
   destroyed() {
     // window.removeEventListener('resize', this.handleResize)
@@ -675,7 +672,7 @@ export default {
 }
 
 #body-container {
-  padding: 0 5%;
+  /*padding: 0 5%;*/
 }
 
 #desktop {

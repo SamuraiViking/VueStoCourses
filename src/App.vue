@@ -23,20 +23,9 @@ export default {
     return {
       x: 0,
       y: 0,
-      seasonBackgroundColors: {
-        winter: 'winter-background-color',
-        fall: 'fall-background-color'
-      },
-      seasonBackgroundImages: {
-        winter: 'winter-background-image',
-        fall: 'fall-background-color'
-      }
     }
   },
   created() {
-    if(navigator.userAgent.search("Chrome") === -1 ) {
-      alert('PLEASE USE CHROME !!! On your current browser the website will be very slow and ugly')
-    }
   }
 }
 </script>

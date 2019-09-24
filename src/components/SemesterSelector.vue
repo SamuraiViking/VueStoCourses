@@ -35,7 +35,7 @@ export default {
         { text: 'Independent Research', value: 'IR' },
         { text: 'Academic Internship', value: 'AI' },
       ],
-      nightMode: false,
+      nightMode: 0,
       semesters: [
         { text: 'Fall', value: 1 },
         { text: 'Interim', value: 2 },
@@ -131,6 +131,7 @@ export default {
     }
   },
   mounted() {
+    this.nightMode = window.innerWidth <= 300;
     this.changeSeasonTheme(1)
   },
   methods: {
@@ -160,21 +161,13 @@ export default {
       var app = document.getElementById('app')
       var tables = document.getElementsByTagName('table')
       var tableTop = document.getElementsByClassName('vgt-global-search')[0]
-      // var header = document.getElementById('website-header')
-      // var myCourses = document.getElementById('user-courses-table-options')
       var stolafCourses = document.getElementById('stolaf-courses-table-options')
-      // var stolafActionBtns = document.getElementsByClassName('stolaf-table-btn')
-      // var userActionBtns = document.getElementsByClassName('user-action-btn')
-      // var pagination = document.getElementsByClassName('vgt-wrap__footer')
-      // var navbar = document.getElementsByClassName('navbar')
       var contact = document.getElementById('contact')
       var upArrowCircle = document.getElementById('up-arrow-circle')
       var tableColumns = document.getElementsByClassName("table-columns")
       var tableRows = document.getElementsByClassName("my-row")
       var vgtSelect = document.getElementsByClassName("vgt-select")
       var vgtInput = document.getElementsByClassName("vgt-input")
-      // var upArrowCircle2 = document.getElementById("up-button-circle")
-      // var showBtn = document.getElementById("show-btn")
       var stolafCoursesFooter = document.getElementById('stolaf-courses-footer')
 
 
@@ -183,12 +176,7 @@ export default {
       // Set style of elements 
       tables[0].style.background = this.tables1[semester]
       tableTop.style.background = this.contact[semester]
-      // tables[1].style.background = this.tables2[semester]
-      // header.style.background = this.header[semester]
-      // myCourses.style.background = this.myCourses[semester]
       stolafCourses.style.background = this.stolafCourses[semester]
-      // pagination[0].style.background = this.pagination[semester]
-      // navbar[0].style.background = this.navbar[semester]
       contact.style.background = this.contact[semester]
       upArrowCircle.style.background = this.contact[semester]
       stolafCoursesFooter.style.background = this.contact[semester]
@@ -232,6 +220,16 @@ export default {
 </script>
 
 <style>
+
+/*#night-mode-switch {
+  visibility: hidden;
+}*/
+
+@media screen and (max-width: 300px) {
+  #night-mode-switch {
+    visibility: hidden;
+  }
+}
 
 #term-selector {
   margin-bottom: 25px;
