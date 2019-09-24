@@ -225,7 +225,7 @@ export default {
   visibility: hidden;
 }*/
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 400px) {
   #night-mode-switch {
     visibility: hidden;
   }
